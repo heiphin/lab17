@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #menu {
+      width: 0;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #333;
+      overflow-x: hidden;
+      transition: 0.5s;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #menu li {
+      margin: 20px;
+    }
+
+    #menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    #showMenu, #closeMenu {
+      display: none;
+    }
+
+    #showMenu {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <button id="showMenu">Показать меню</button>
+  <button id="closeMenu">Закрыть меню</button>
+  <div id="menu">
+    <ul>
+      <li><a href="#">Пункт меню 1</a></li>
+      <li><a href="#">Пункт меню 2</a></li>
+      <li><a href="#">Пункт меню 3</a></li>
+    </ul>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#showMenu").click(function() {
+        $("#menu").css("width", "250px");
+        $("#showMenu").hide();
+        $("#closeMenu").show();
+      });
+
+      $("#closeMenu").click(function() {
+        $("#menu").css("width", "0");
+        $("#showMenu").show();
+        $("#closeMenu").hide();
+      });
+    });
+  </script>
+</body>
+</html>

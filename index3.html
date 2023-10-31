@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма для отправки данных</title>
+    <style>
+        .bn3637 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  backface-visibility: hidden;
+  border: 0.3rem solid transparent;
+  border-radius: 3rem;
+  background: black;
+}
+
+.bn36 {
+  border-color: #fff;
+  transition: transform 0.2s cubic-bezier(0.235, 0, 0.05, 0.95);
+}
+
+.bn36:hover {
+  transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) !important;
+}
+    </style>
+</head>
+<body>
+
+<center>
+    
+    <div style="border: 2px solid black; margin-top: 100px; margin-left: -100px; width: 300px; height: 250px;">
+        <h1 style="font-family: sans-serif;">Login</h1>
+        <form id="dataForm">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" style="margin-top: 10px;">
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" style="margin-top: 15px;">
+            <br>
+            <input type="submit" value="Отправить" style="margin-top: 50px;" class="bn3637 bn36">
+        </form>
+        <div id="response"></div>
+    </div>
+</center>
+
+    <script>
+        document.getElementById("dataForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "ваш_серверный_путь_здесь", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            var data = {
+                name: name,
+                email: email
+            };
+            var jsonData = JSON.stringify(data);
+            xhr.send(jsonData);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    document.getElementById("response").innerHTML = "Ответ от сервера: " + response.message;
+                }
+            };
+        });
+    </script>
+</body>
+</html>

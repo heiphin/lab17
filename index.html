@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Галерея изображений</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+         #animated-element {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            margin-left: 50px;
+        }
+        #moving-element {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+            top: 50%;
+            left: 0;
+        }
+        #menu {
+      width: 0;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #333;
+      overflow-x: hidden;
+      transition: 0.5s;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #menu li {
+      margin: 20px;
+    }
+
+    #menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    #showMenu, #closeMenu {
+      display: none;
+    }
+
+    #showMenu {
+      display: block;
+    }
+    </style>
+</head>
+<body>
+    <div class="gallery" style="margin-top: 20px; margin-left: 50px;">
+        <div class="image-container">
+            <img src="first.jpeg" alt="Изображение 1">
+        </div>
+        <div class="image-container">
+            <img src="second.jpeg" alt="Изображение 2">
+        </div>
+        <div class="image-container">
+            <img src="third.jpeg" alt="Изображение 3">
+        </div>
+    </div>
+    <button id="prev" class="w3-button w3-black w3-round-small" style="margin-top: 20px; margin-left: 50px;">Предыдущее</button>
+    <button id="next" class="w3-button w3-black w3-round-small" style="margin-top: 20px; margin-left: 18px;">Следующее</button>
+
+
+
+    
+    <div id="animated-element"></div>
+
+
+
+    <div id="moving-element" style="margin-top: 100px;"></div>
+
+
+<h3 style="font-family: sans-serif; margin-top: 150px; margin-left: 10px;"><a href="index2.html" style="text-decoration: none;">Задание 4</a></h3>
+<h3 style="font-family: sans-serif; margin-left: 10px;"><a href="index3.html" style="text-decoration: none;">Задание 5</a></h3>
+
+    <script>
+        $(document).ready(function() {
+            var currentImage = 0;
+            var totalImages = $(".image-container").length;
+
+            $(".image-container:gt(0)").hide();
+
+            $("#next").click(function() {
+                $(".image-container:eq(" + currentImage + ")").hide();
+                currentImage = (currentImage + 1) % totalImages;
+                $(".image-container:eq(" + currentImage + ")").show();
+            });
+
+            $("#prev").click(function() {
+                $(".image-container:eq(" + currentImage + ")").hide();
+                currentImage = (currentImage - 1 + totalImages) % totalImages;
+                $(".image-container:eq(" + currentImage + ")").show();
+            });
+        });
+
+
+        $(document).ready(function() {
+            $("#animated-element").hover(function() {
+                $(this).css({
+                    width: "150px",
+                    height: "150px",
+                    backgroundColor: "red"
+                });
+            }, function() {
+                $(this).css({
+                    width: "100px",
+                    height: "100px",
+                    backgroundColor: "blue"
+                });
+            });
+        });
+
+
+
+        $(document).ready(function() {
+    function moveRight() {
+        $("#moving-element").animate(
+            { left: "100%" }, 
+            5000, 
+            "linear", 
+            function() {
+                
+                $(this).css("left", "0");
+                moveRight(); 
+            }
+        );
+    }
+
+    moveRight(); 
+});
+
+
+
+    </script>
+</body>
+</html>
